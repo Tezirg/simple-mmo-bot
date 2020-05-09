@@ -7,6 +7,7 @@ var bot_combat_travel_attack_id = "a:contains(' Attack')"
 
 var bot_combat_use_id = "#useItem"
 var bot_combat_attack_bt_id = "#attackButton"
+var bot_combat_used_id = "h2:contains('Success!')"
 var bot_combat_ended_id = "h2:contains('Woohoo! You defeated the enemy!')"
 var bot_combat_done_id = "button:contains('OK')"
 var bot_combat_delay = 825
@@ -71,7 +72,12 @@ class BotCombat {
 		    var usebt = targetDOM.find(bot_combat_use_id);
 		    try { usebt[0].click(); } catch {}
 		    setTimeout(function() {
-			res(true);
+			targetDOM = $(that.targetID).contents();
+			var usedItem = targetDOM.find(bot_combat_used_id);
+			if (usedItem.length >= 1)
+			    res(true);
+			else
+			    res(false);
 		    }, bot_combat_delay);
 		}
 	    });
@@ -88,15 +94,25 @@ class BotCombat {
 	};
 	var combat_tick = function() {
 	    combat_useItem().then((usedItem) => {
-		var targetDOM = $(that.targetID).contents();
-		var attackbt = targetDOM.find(bot_combat_attack_bt_id);
-		try { attackbt[0].click(); } catch {}
-		setTimeout(function() {
-		    if (combat_over())
-			combat_done();
-		    else
+		if (usedItem) {
+		    // Use multiple items
+		    setTimeout(function() {
 			combat_tick();
-		}, bot_combat_delay);
+		    }, bot_combat_delay);
+		}
+		else {
+		    setTimeout(function() {
+			var targetDOM = $(that.targetID).contents();
+			var attackbt = targetDOM.find(bot_combat_attack_bt_id);
+			try { attackbt[0].click(); } catch {}
+			setTimeout(function() {
+			    if (combat_over())
+				combat_done();
+			    else
+				combat_tick();
+			}, bot_combat_delay);
+		    }, bot_combat_delay);
+		}
 	    });
 	};
 	combat_tick();
