@@ -2,13 +2,16 @@ var bot_home_url = "https://web.simple-mmo.com/"
 var bot_travel_home_delay = 20
 var bot_travel_url = "https://web.simple-mmo.com/travel"
 var bot_travel_button_id = ".stepbuttonnew"
+var bot_travel_attack_id = "a:contains(' Attack')"
 
 class BotTravel {
-    constructor(targetID, user) {
+    constructor(targetID, user, combat) {
 	this.targetID = targetID;
 	this.user = user;
+	this.combat = combat;
 	this.travelTimer = null;
 	this.stepDelay = 0;
+	this.travelCombat = false;
     }
 
     canStep() {
@@ -17,6 +20,10 @@ class BotTravel {
 	return false;
     }
 
+    setTravelCombat(enabled) {
+	this.travelCombat = enabled;
+    }
+    
     setDelay(d) {
 	this.stepDelay = d;
     }
@@ -43,8 +50,18 @@ class BotTravel {
 		that.setDelay(0);
 	    }, delay * 1000 + 50);
 
+	    // Check if we can combat
+	    if (that.travelCombat && that.combat.canCombat())
+	    {
+		// Is there a mob to kill
+		targetDOM = $(that.targetID).contents();
+		var attackButton = targetDOM.find(bot_travel_attack_id);
+		if (attackButton.length >= 1)
+		    that.combat.travelCombat();
+	    }
 	    // Return to home for slow mode
-	    if (delay >= bot_travel_home_delay) {
+	    if (delay >= bot_travel_home_delay && !that.combat.isInCombat())
+	    {
 		$(that.targetID).prop("src", bot_home_url);
 	    }
 	}, 500);

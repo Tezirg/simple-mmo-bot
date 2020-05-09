@@ -14,6 +14,7 @@ class BotUser {
 	this.current_health = -1;
 	this.max_health = -1;
 	this.current_xp = -1;
+	this.ratio_health = -1.0;
 	this.max_xp = -1;
 	this.current_energy = -1;
 	this.max_energy = -1;
@@ -32,6 +33,7 @@ class BotUser {
     update() {
 	this.current_health = this.updateFromID(bot_user_current_health_id);
 	this.max_health = this.updateFromID(bot_user_max_health_id);
+	this.percent_health = (this.current_health / this.max_health) * 100.0;
 	this.current_xp = this.updateFromID(bot_user_current_xp_id);
 	this.max_xp = this.updateFromID(bot_user_max_xp_id);
 	this.current_energy = this.updateFromID(bot_user_current_energy_id);
