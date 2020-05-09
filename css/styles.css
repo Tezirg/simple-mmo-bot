@@ -1,0 +1,20 @@
+#bot-main {
+    width: 98vw;
+    height: 100vh;
+}
+
+#bot-conf {
+    width: 95vw;
+    height: 10vh;
+}
+#bot-ctrl {
+    width: 95vw;
+    height: 10vh;
+}
+
+#bot-target {
+    display: block;
+    margin: auto;
+    width: 95vw;
+    height: 95vh;
+}

@@ -1,0 +1,48 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>SimpleMMO Bot</title>
+  <meta name="description" content="Simple mmo bot">
+  <meta name="author" content="Tezirg">
+
+  <link rel="stylesheet" href="css/styles.css">
+
+</head>
+
+<body>
+  <div id="bot-main">
+    <div id="bot-conf">
+      <div id="bot-conf-travel">
+	<label for="auto-travel">Auto travel</label>
+	<input type="checkbox" id="auto-travel" name="auto-travel" checked>
+      </div>
+      <div id="bot-conf-job">
+	<label for="auto-job">Auto job</label>
+	<input type="checkbox" id="auto-job" name="auto-job">
+      </div>      
+      <div id="bot-conf-quest">
+	<label for="auto-quest">Auto quest</label>
+	<input type="checkbox" id="auto-quest" name="auto-quest">
+	<label for="quest-id">Quest:</label>
+	<input type="number" id="quest-id" name="quest-id" min="0">
+      </div>
+    </div>
+    <div id="bot-ctrl">
+      <button id="bot-run">Run</button>
+      <button id="bot-stop">Stop</button>
+      <p id="bot-status"></p>
+    </div>
+    <iframe id="bot-target" src="https://web.simple-mmo.com/">
+    </iframe>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="js/travel.js"></script>
+  <script src="js/job.js"></script>
+  <script src="js/quest.js"></script>
+  <script src="js/user.js"></script>
+  <script src="js/bot.js"></script>
+</body>
+</html>
