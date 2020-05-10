@@ -143,7 +143,7 @@ class BotCombat {
 	    setTimeout(function() {
 		targetDOM = $(that.targetID).contents();
 		var attackbt = targetDOM.find(bot_combat_arena_attack_id);
-		attackbt[0].click();
+		try { attackbt[0].click(); } catch {}
 		setTimeout(function() {
 		    that.combat();
 		}, bot_combat_delay);
