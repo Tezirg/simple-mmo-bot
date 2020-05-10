@@ -5,6 +5,7 @@ var bot_auto_travel_combat_id = "#auto-travel-combat";
 var bot_auto_quest_id = "#auto-quest";
 var bot_auto_quest_index_id = "#quest-id";
 var bot_auto_job_id = "#auto-job";
+var bot_auto_job_num_id = "#job-num";
 var bot_auto_battle_arena_id = "#auto-battle-arena";
 var bot_auto_combat_health_id = "#auto-combat-health";
 var bot_auto_combat_use_id = "#auto-combat-use";
@@ -59,6 +60,8 @@ class SimpleMMOBot {
 	this.autoQuest = $(bot_auto_quest_id).is(":checked");
 	this.autoQuestID = parseInt($(bot_auto_quest_index_id).val());
 	this.autoJob = $(bot_auto_job_id).is(":checked");
+	var jobNumber = parseInt($(bot_auto_job_num_id).val());
+	this.job.setNumber(jobNumber);
 	this.autoBattleArena = $(bot_auto_battle_arena_id).is(":checked");
 	var autoCombatHealth = parseInt($(bot_auto_combat_health_id).val());
 	var autoCombatUse = parseInt($(bot_auto_combat_use_id).val());
@@ -90,8 +93,11 @@ class SimpleMMOBot {
 			 that.combat.canArenaCombat()) {
 		    that.combat.arenaCombat();
 		}
-		else if (that.autoJob && that.user.steps <= 0) {
-		    that.job.job();
+		else if (that.autoJob) {
+		    if (that.autoTravel && that.user.steps <= 0)
+			that.job.job();
+		    else if (that.autoTravel == false)
+			that.job.job();
 		}
 	    }
 	}, bot_refresh_freq);
