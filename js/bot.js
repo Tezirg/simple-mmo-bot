@@ -47,7 +47,7 @@ class SimpleMMOBot {
 	this.quest = new BotQuest(this.targetID, this.user, this.random);
 	// Jobs
 	this.autoJob = false;
-	this.job = new BotJob(this.targetID);
+	this.job = new BotJob(this.targetID, this.random);
 	// Combat
 	this.autoBattleArena = false;
 	this.combat = new BotCombat(this.targetID, this.user, this.random);

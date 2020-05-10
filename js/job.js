@@ -4,13 +4,14 @@ var bot_job_select = "a:contains('Go to your job')"
 var bot_job_start_id = "a:contains('Start working')"
 var bot_job_start_bt_id = "button:contains('Start the job')"
 var bot_job_num_id = "input[type='range']"
-var bot_job_time = 10 * 60
-var bot_job_time_delay = 1 * 60
-var bot_job_delay = 525
+var bot_job_time = 10 * 60 * 1000
+var bot_job_time_delay = 65 * 1000
+var bot_job_delay = 785
 
 class BotJob {
-    constructor(targetID) {
+    constructor(targetID, random) {
 	this.targetID = targetID;
+	this.rnd = random;
 	this.jobDelay = 0;
 	this.jobNum = 1;
     }
@@ -47,17 +48,18 @@ class BotJob {
 		    numJobs.val(that.jobNum);
 		    var jobButton = targetDOM.find(bot_job_start_bt_id);
 		    try { jobButton[0].click(); } catch {}
-		    var jobTime = bot_job_time * 1000 * that.jobNum
-		    jobTime += bot_job_time_delay * 1000;
-		    that.jobDelay = jobTime + 250;
+		    var jobTime = bot_job_time  * that.jobNum
+		    jobTime += bot_job_time_delay;
+		    jobTime = that.rnd.randDelay(jobTime);
+		    that.jobDelay = jobTime;
 		    // Done after job time
 		    setTimeout(function() {
 			that.jobDelay = 0;
 			// Redirect to home
 			$(that.targetID).prop("src", bot_home_url);
 		    }, jobTime);
-		}, bot_job_delay);
-	    }, bot_job_delay);
+		}, that.rnd.randDelay(bot_job_delay));
+	    }, that.rnd.randDelay(bot_job_delay));
 	});
 	$(this.targetID).prop("src", job_url);
     }
@@ -73,7 +75,7 @@ class BotJob {
 		    $(that.targetID).unbind();
 		    setTimeout(function() {
 			that.triggerJob();
-		    }, 250);
+		    }, that.rnd.randDelay(bot_job_delay));
 		});
 		$(this.targetID).prop("src", bot_job_url);		
 	    }
