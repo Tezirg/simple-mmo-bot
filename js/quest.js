@@ -48,6 +48,7 @@ class BotQuest {
     quest(questIndex) {
 	if (this.questDelay == 0)
 	{
+	    this.questDelay = 1;
 	    var target_url = $(this.targetID).prop('src');
 	    if (target_url != bot_quest_url) {
 		var that = this;
