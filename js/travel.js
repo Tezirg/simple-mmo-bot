@@ -80,7 +80,7 @@ class BotTravel {
 		    $(that.targetID).unbind();
 		    setTimeout(function() {
 			that.triggerStep();
-		    }, that.rnd.randDelay(250));
+		    }, that.rnd.randDelay(790));
 		});
 		$(this.targetID).prop("src", bot_travel_url);
 	    }
