@@ -2,7 +2,7 @@ var bot_quest_url = "https://web.simple-mmo.com/quests/viewall"
 var bot_quest_list_select = "button:contains('View Quest')"
 var bot_quest_start_id = "button:contains('Perform quest')"
 var bot_quest_cancel_id = "button:contains('Cancel')"
-var bot_quest_delay = 525
+var bot_quest_delay = 825
 
 class BotQuest {
     constructor(targetID, user) {
@@ -52,7 +52,7 @@ class BotQuest {
 		    $(that.targetID).unbind();
 		    setTimeout(function() {
 			that.triggerQuest(questIndex);
-		    }, 100);
+		    }, 150);
 		});
 		$(this.targetID).prop("src", bot_quest_url);		
 	    }

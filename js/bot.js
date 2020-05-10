@@ -8,6 +8,9 @@ var bot_auto_job_id = "#auto-job";
 var bot_auto_battle_arena_id = "#auto-battle-arena";
 var bot_auto_combat_health_id = "#auto-combat-health";
 var bot_auto_combat_use_id = "#auto-combat-use";
+var bot_auto_bank_id = "#auto-deposit";
+var bot_auto_bank_keep_id = "#keep-amount";
+var bot_auto_bank_deposit_id = "#deposit-amount";
 var bot_run_bt_id = "#bot-run";
 var bot_stop_bt_id = "#bot-stop";
 var bot_refresh_freq = 1750;
@@ -32,6 +35,18 @@ class SimpleMMOBot {
 	// Travel
 	this.autoTravel = false;
 	this.travel = new BotTravel(this.targetID, this.user, this.combat);
+	// Banking
+	this.autoBank = false;
+	this.bank = new BotBank(this.targetID, this.user);
+    }
+
+    isBusy() {
+	if (!this.job.canJob())
+	    return true;
+	if (this.combat.isInCombat())
+	    return true;
+	if (this.bank.isBanking)
+	    return true;
     }
     
     start() {
@@ -49,15 +64,23 @@ class SimpleMMOBot {
 	var autoCombatUse = parseInt($(bot_auto_combat_use_id).val());
 	this.combat.setMinHealth(autoCombatHealth);
 	this.combat.setUseItemHealth(autoCombatUse);
+	this.autoBank = $(bot_auto_bank_id).is(":checked");
+	var bankKeep = parseInt($(bot_auto_bank_keep_id).val());
+	var bankDeposit = parseInt($(bot_auto_bank_deposit_id).val());
+	this.bank.setKeepAmount(bankKeep);
+	this.bank.setDepositAmount(bankDeposit);
 
 	$(this.statusID).text("Running");
 	// Continuously update user values
 	this.userInterval = setInterval(function() {
 	    that.user.update();
 
-	    if (that.job.canJob() && !that.combat.isInCombat())
+	    if (!that.isBusy())
 	    {
-		if (that.autoQuest && that.quest.canQuest()) {
+		if (that.autoBank && that.bank.canBank()) {
+		    that.bank.bank();
+		}
+		else if (that.autoQuest && that.quest.canQuest()) {
 		    that.quest.quest(that.autoQuestID);
 		}
 		else if (that.autoTravel && that.travel.canStep()) {

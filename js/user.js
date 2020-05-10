@@ -27,6 +27,7 @@ class BotUser {
 	var targetDOM = $(this.targetID).contents()
 	var c_div = targetDOM.find(id_selector)
 	var c_txt = c_div.text();
+	c_txt = c_txt.replace(',', '');
 	return parseInt(c_txt);
     }
     
