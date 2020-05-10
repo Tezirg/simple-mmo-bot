@@ -147,7 +147,7 @@ class BotCombat {
 		setTimeout(function() {
 		    that.combat();
 		}, bot_combat_delay);
-	    }, bot_combat_delay);
+	    }, bot_combat_delay * 2);
 	}, bot_combat_delay);
 	
     }
