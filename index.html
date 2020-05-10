@@ -15,6 +15,14 @@
 <body>
   <div id="bot-main">
     <div id="bot-conf">
+      <div id="bot-conf-randomize">
+	<label for="randomize-delay">Randomize delays</label>
+	<input type="checkbox" id="randomize-delay"
+	       name="randomize-delay" checked />
+	<label for="randomize-refresh">Randomize refresh</label>
+	<input type="checkbox" id="randomize-refresh"
+	       name="randomize-refresh" checked />
+      </div>
       <div id="bot-conf-travel">
 	<label for="auto-travel">Auto travel</label>
 	<input type="checkbox" id="auto-travel" name="auto-travel" checked />
@@ -79,6 +87,7 @@
   <script src="js/job.js"></script>
   <script src="js/quest.js"></script>
   <script src="js/user.js"></script>
+  <script src="js/random.js"></script>
   <script src="js/bot.js"></script>
 </body>
 </html>

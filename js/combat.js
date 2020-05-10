@@ -13,9 +13,10 @@ var bot_combat_done_id = "button:contains('OK')"
 var bot_combat_delay = 825
 
 class BotCombat {
-    constructor(targetID, user) {
+    constructor(targetID, user, random) {
 	this.targetID = targetID;
 	this.user = user;
+	this.rnd = random;
 	this.minHealth = 0.0;
 	this.useItemHealth = 0.0;
 	this.inCombat = false;
@@ -78,7 +79,7 @@ class BotCombat {
 			    res(true);
 			else
 			    res(false);
-		    }, bot_combat_delay);
+		    }, that.rnd.randDelay(bot_combat_delay));
 		}
 	    });
 	    return usePromise;
@@ -98,7 +99,7 @@ class BotCombat {
 		    // Use multiple items
 		    setTimeout(function() {
 			combat_tick();
-		    }, bot_combat_delay);
+		    }, that.rnd.randDelay(bot_combat_delay));
 		}
 		else {
 		    setTimeout(function() {
@@ -110,8 +111,8 @@ class BotCombat {
 				combat_done();
 			    else
 				combat_tick();
-			}, bot_combat_delay);
-		    }, bot_combat_delay);
+			}, that.rnd.randDelay(bot_combat_delay));
+		    }, that.rnd.randDelay(bot_combat_delay));
 		}
 	    });
 	};
@@ -128,7 +129,7 @@ class BotCombat {
 	try { attackbt[0].click(); } catch {}
 	setTimeout(function() {
 	    that.combat();
-	}, bot_combat_delay);
+	}, that.rnd.randDelay(bot_combat_delay));
     }
 
     arenaTrigger() {
@@ -146,9 +147,9 @@ class BotCombat {
 		try { attackbt[0].click(); } catch {}
 		setTimeout(function() {
 		    that.combat();
-		}, bot_combat_delay);
-	    }, bot_combat_delay * 2);
-	}, bot_combat_delay);
+		}, that.rnd.randDelay(bot_combat_delay));
+	    }, that.rnd.randDelay(bot_combat_delay + bot_combat_delay / 2));
+	}, that.rnd.randDelay(bot_combat_delay));
 	
     }
 
@@ -164,7 +165,7 @@ class BotCombat {
                 $(that.targetID).unbind();
                 setTimeout(function() {
 		    that.arenaTrigger();
-                }, bot_combat_delay);
+                }, that.rnd.randDelay(bot_combat_delay));
             });
 	    // Go to arena page
             $(this.targetID).prop("src", bot_combat_arena_url);

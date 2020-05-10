@@ -5,9 +5,10 @@ var bot_quest_cancel_id = "button:contains('Cancel')"
 var bot_quest_delay = 825
 
 class BotQuest {
-    constructor(targetID, user) {
+    constructor(targetID, user, random) {
 	this.targetID = targetID;
 	this.user = user;
+	this.rnd = random;
 	this.questDelay = 0;
     }
 
@@ -37,8 +38,8 @@ class BotQuest {
 		try { questButton[0].click(); } catch {}
 		// Set delay to zero
 		that.questDelay = 0;
-	    }, bot_quest_delay);
-	}, bot_quest_delay);
+	    }, that.rnd.randDelay(bot_quest_delay));
+	}, that.rnd.randDelay(bot_quest_delay));
 
     }
     
@@ -52,7 +53,7 @@ class BotQuest {
 		    $(that.targetID).unbind();
 		    setTimeout(function() {
 			that.triggerQuest(questIndex);
-		    }, 150);
+		    }, that.rnd.randDelay(250));
 		});
 		$(this.targetID).prop("src", bot_quest_url);		
 	    }

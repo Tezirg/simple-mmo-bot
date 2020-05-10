@@ -1,6 +1,9 @@
 var bot_target_id = "#bot-target";
 var bot_status_id = "#bot-status";
 
+var bot_randomize_delay = "#randomize-delay"
+var bot_randomize_refresh = "#randomize-refresh"
+
 var bot_auto_travel_id = "#auto-travel";
 var bot_auto_travel_combat_id = "#auto-travel-combat";
 
@@ -29,26 +32,32 @@ class SimpleMMOBot {
     constructor(targetID, statusID) {
 	this.targetID = targetID;
 	this.statusID = statusID;
+	// Randomize
+	this.randomizeDelay = true;
+	this.randomizeRefresh = true;
+	this.random = new BotRandomize();
+	
 	// Character
-	this.user = new BotUser(this.targetID);
+	this.user = new BotUser(this.targetID, this.random);
 	this.userInterval = null;
 	this.autoPoints = false;
 	// Quests
 	this.autoQuest = false;
 	this.autoQuestID = -1;
-	this.quest = new BotQuest(this.targetID, this.user);
+	this.quest = new BotQuest(this.targetID, this.user, this.random);
 	// Jobs
 	this.autoJob = false;
 	this.job = new BotJob(this.targetID);
 	// Combat
 	this.autoBattleArena = false;
-	this.combat = new BotCombat(this.targetID, this.user);
+	this.combat = new BotCombat(this.targetID, this.user, this.random);
 	// Travel
 	this.autoTravel = false;
-	this.travel = new BotTravel(this.targetID, this.user, this.combat);
+	this.travel = new BotTravel(this.targetID, this.user,
+				    this.combat, this.random);
 	// Banking
 	this.autoBank = false;
-	this.bank = new BotBank(this.targetID, this.user);
+	this.bank = new BotBank(this.targetID, this.user, this.random);
     }
 
     isBusy() {
@@ -63,11 +72,47 @@ class SimpleMMOBot {
 
 	return false;
     }
+
+    botTick() {
+	var that = this;
+	that.user.update();
+
+	if (!that.isBusy())
+	{
+	    if (that.autoPoints && that.user.level_up) {
+		that.user.charPoints();
+	    }
+	    else if (that.autoBank && that.bank.canBank()) {
+		that.bank.bank();
+	    }
+	    else if (that.autoQuest && that.quest.canQuest()) {
+		that.quest.quest(that.autoQuestID);
+	    }
+	    else if (that.autoTravel && that.travel.canStep()) {
+		that.travel.travel();
+	    }
+	    else if (that.autoBattleArena &&
+		     that.combat.canArenaCombat()) {
+		that.combat.arenaCombat();
+	    }
+	    else if (that.autoJob) {
+		if (that.autoTravel && that.user.steps <= 0)
+		    that.job.job();
+		else if (that.autoTravel == false)
+		    that.job.job();
+	    }
+	}
+    }
     
     start() {
 	var that = this
 	
 	// Get config
+	this.randomizeDelay = $(bot_randomize_delay).is(":checked");
+	this.randomizeRefresh = $(bot_randomize_refresh).is(":checked");
+	this.random.delays = this.randomizeDelay;
+	this.random.refresh = this.randomizeRefresh;
+	
 	var autoTravelCombat = $(bot_auto_travel_combat_id).is(":checked");
 	this.autoTravel = $(bot_auto_travel_id).is(":checked");
 	this.travel.setTravelCombat(autoTravelCombat);
@@ -94,39 +139,16 @@ class SimpleMMOBot {
 	this.autoPoints = $(bot_auto_points_id).is(":checked");
 	var pointIdx = parseInt($(bot_auto_points_index_id).val());
 	this.user.pointsIndex = pointIdx;
-
 	
 	$(this.statusID).text("Running");
 	// Continuously update user values
-	this.userInterval = setInterval(function() {
-	    that.user.update();
-
-	    if (!that.isBusy())
-	    {
-		if (that.autoPoints && that.user.level_up) {
-		    that.user.charPoints();
-		}
-		else if (that.autoBank && that.bank.canBank()) {
-		    that.bank.bank();
-		}
-		else if (that.autoQuest && that.quest.canQuest()) {
-		    that.quest.quest(that.autoQuestID);
-		}
-		else if (that.autoTravel && that.travel.canStep()) {
-		    that.travel.travel();
-		}
-		else if (that.autoBattleArena &&
-			 that.combat.canArenaCombat()) {
-		    that.combat.arenaCombat();
-		}
-		else if (that.autoJob) {
-		    if (that.autoTravel && that.user.steps <= 0)
-			that.job.job();
-		    else if (that.autoTravel == false)
-			that.job.job();
-		}
-	    }
-	}, bot_refresh_freq);
+	var intervalFn = function() {
+	    that.botTick();
+	    clearInterval(that.userInterval);
+	    var refresh_delay = that.random.randRefresh(bot_refresh_freq)
+	    that.userInterval = setInterval(intervalFn, refresh_delay);
+	};
+	this.userInterval = setInterval(intervalFn, 250);
     }
 
     stop() {

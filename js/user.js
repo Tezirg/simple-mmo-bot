@@ -18,8 +18,9 @@ var bot_char_assign_confirm_id = "button:contains('Add stat points')"
 var bot_char_delay = 855;
 
 class BotUser {
-    constructor(targetID) {
+    constructor(targetID, random) {
 	this.targetID = targetID;
+	this.rnd = random;
 	this.current_health = -1;
 	this.max_health = -1;
 	this.percent_health = -1.0;
@@ -84,7 +85,7 @@ class BotUser {
 		setTimeout(function() {
 		    assignBts[that.pointsIndex].click();
 		    res(true);
-		}, bot_char_delay);
+		}, that.rnd.randDelay(bot_char_delay));
 	    }
 	    catch (e) {
 		rej(false);
@@ -102,7 +103,7 @@ class BotUser {
 		setInput.val(that.points);
 		setTimeout(function() {
 		    res(true);
-		}, bot_char_delay);
+		}, that.rnd.randDelay(bot_char_delay));
 	    }
 	    catch {
 		rej(false);
@@ -122,7 +123,7 @@ class BotUser {
 		confirmBt[0].click();
 		setTimeout(function() {
 		    res(true);
-		}, bot_char_delay);
+		}, that.rnd.randDelay(bot_char_delay));
 	    }
 	    catch {
 		rej(false);

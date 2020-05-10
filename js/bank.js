@@ -7,9 +7,10 @@ var bot_bank_confirm_id = "button:contains('Deposit')"
 var bot_bank_delay = 825
 
 class BotBank {
-    constructor(targetID, user) {
+    constructor(targetID, user, random) {
 	this.targetID = targetID;
 	this.user = user;
+	this.rnd = random;
 	this.keepAmount = 0.0;
 	this.depositAmount = 0.0;
 	this.isBanking = false;
@@ -43,9 +44,9 @@ class BotBank {
 	var depositBt = targetDOM.find(bot_bank_confirm_id);
 	try { depositBt[0].click(); } catch {}
 	setTimeout(function() {
-	    that.isBanking = false;
 	    $(that.targetID).prop("src", bot_home_url);
-	}, bot_bank_delay);	
+	    that.isBanking = false;
+	}, that.rnd.randDelay(bot_bank_delay));	
     }
 
     bank() {
@@ -60,13 +61,15 @@ class BotBank {
                 $(that.targetID).unbind();
                 setTimeout(function() {
 		    that.bankTrigger();
-                }, bot_bank_delay);
+                }, that.rnd.randDelay(bot_bank_delay));
             });
 	    // Go to bank page
             $(this.targetID).prop("src", bot_bank_url);
 	}
 	else {
-	    this.bankTrigger();
+            setTimeout(function() {
+		that.bankTrigger();
+            }, that.rnd.randDelay(bot_bank_delay));
 	}
     }
 }
