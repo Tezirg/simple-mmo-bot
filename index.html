@@ -17,27 +17,27 @@
     <div id="bot-conf">
       <div id="bot-conf-travel">
 	<label for="auto-travel">Auto travel</label>
-	<input type="checkbox" id="auto-travel" name="auto-travel" checked>
+	<input type="checkbox" id="auto-travel" name="auto-travel" checked />
       </div>
       <div id="bot-conf-job">
 	<label for="auto-job">Auto job</label>
-	<input type="checkbox" id="auto-job" name="auto-job">
+	<input type="checkbox" id="auto-job" name="auto-job" />
 	<label for="job-num">Number of jobs:</label>
 	<input type="number" id="job-num" name="job-num" min="1" value="1" />
       </div>      
       <div id="bot-conf-quest">
 	<label for="auto-quest">Auto quest</label>
-	<input type="checkbox" id="auto-quest" name="auto-quest">
+	<input type="checkbox" id="auto-quest" name="auto-quest" />
 	<label for="quest-id">Quest:</label>
 	<input type="number" id="quest-id" name="quest-id" min="0" value="0" />
       </div>
       <div id="bot-conf-combat">
 	<label for="auto-battle-arena">Auto battle arena</label>
 	<input type="checkbox" id="auto-battle-arena"
-	       name="auto-battle-arena">
+	       name="auto-battle-arena" />
 	<label for="auto-travel-combat">Enable travel combat</label>
 	<input type="checkbox" id="auto-travel-combat"
-	       name="auto-travel-combat">	
+	       name="auto-travel-combat" />	
 	<label for="auto-combat-health">Minimum combat health %</label>
 	<input id="auto-combat-health" type="range" min="0.0"
 	       max="100.0" step="1.0" value="40.0" />
@@ -51,10 +51,17 @@
 	<input type="checkbox" id="auto-deposit" name="auto-deposit">
 	<label for="keep-amount">Keep Amount:</label>
 	<input type="number" id="keep-amount" name="keep-amount"
-	       min="0" value="10000">
+	       min="0" value="10000" />
 	<label for="deposit-amount">Deposit Amount:</label>
 	<input type="number" id="deposit-amount" name="deposit-amount"
-	       min="0" value="10000">
+	       min="0" value="10000" />
+      </div>
+      <div id="bot-conf-char">
+	<label for="auto-points">Auto assign points</label>
+	<input type="checkbox" id="auto-points" name="auto-points">
+	<label for="points-index">Points index:</label>
+	<input type="number" id="points-index" name="points-index"
+	       min="0" max="2" value="2" />	
       </div>
     </div>
     <div id="bot-ctrl">
