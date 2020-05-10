@@ -37,7 +37,9 @@ class BotQuest {
 		var questButton = targetDOM.find(bot_quest_cancel_id);
 		try { questButton[0].click(); } catch {}
 		// Set delay to zero
-		that.questDelay = 0;
+		setTimeout(function() {
+		    that.questDelay = 0;
+		}, that.rnd.randDelay(bot_quest_delay));
 	    }, that.rnd.randDelay(bot_quest_delay));
 	}, that.rnd.randDelay(bot_quest_delay));
 
