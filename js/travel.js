@@ -3,6 +3,7 @@ var bot_travel_home_delay = 20 * 1000 // 20 secs
 var bot_travel_url = "https://web.simple-mmo.com/travel"
 var bot_travel_button_id = ".stepbuttonnew"
 var bot_travel_attack_id = "a:contains(' Attack')"
+var bot_travel_delay = 690;
 
 class BotTravel {
     constructor(targetID, user, combat, random) {
@@ -66,7 +67,7 @@ class BotTravel {
 	    {
 		$(that.targetID).prop("src", bot_home_url);
 	    }
-	}, that.rnd.randDelay(500));
+	}, that.rnd.randDelay(bot_travel_delay));
     }
 
     travel() {
@@ -80,7 +81,7 @@ class BotTravel {
 		    $(that.targetID).unbind();
 		    setTimeout(function() {
 			that.triggerStep();
-		    }, that.rnd.randDelay(790));
+		    }, that.rnd.randDelay(bot_travel_delay));
 		});
 		$(this.targetID).prop("src", bot_travel_url);
 	    }
