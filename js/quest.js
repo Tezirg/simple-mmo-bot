@@ -12,6 +12,13 @@ class BotQuest {
 	this.questDelay = 0;
     }
 
+    isInQuest() {
+	if (this.questDelay == 0)
+	    return false;
+	else
+	    return true;
+    }
+
     canQuest() {
 	return this.user.quests > 0 && this.questDelay == 0;
     }

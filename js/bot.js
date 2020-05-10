@@ -69,7 +69,8 @@ class SimpleMMOBot {
 	    return true;
 	if (this.user.assignPoint)
 	    return true;
-
+	if (this.quest.isInQuest())
+	    return true;
 	return false;
     }
 
