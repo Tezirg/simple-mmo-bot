@@ -89,12 +89,12 @@ class SimpleMMOBot {
 	    else if (that.autoQuest && that.quest.canQuest()) {
 		that.quest.quest(that.autoQuestID);
 	    }
-	    else if (that.autoTravel && that.travel.canStep()) {
-		that.travel.travel();
-	    }
 	    else if (that.autoBattleArena &&
 		     that.combat.canArenaCombat()) {
 		that.combat.arenaCombat();
+	    }
+	    else if (that.autoTravel && that.travel.canStep()) {
+		that.travel.travel();
 	    }
 	    else if (that.autoJob) {
 		if (that.autoTravel && that.user.steps <= 0)
