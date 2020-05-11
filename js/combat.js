@@ -10,7 +10,7 @@ var bot_combat_attack_bt_id = "#attackButton"
 var bot_combat_used_id = "h2:contains('Success!')"
 var bot_combat_ended_id = "h2:contains('Woohoo! You defeated the enemy!')"
 var bot_combat_done_id = "button:contains('OK')"
-var bot_combat_delay = 825
+var bot_combat_delay = 816
 
 class BotCombat {
     constructor(targetID, user, random) {
@@ -89,8 +89,10 @@ class BotCombat {
 	    var donebt = targetDOM.find(bot_combat_done_id);
 	    try { donebt[0].click(); } catch {}
 
-	    that.inCombat = false;
-	    that.rnd.randNav();
+	    setTimeout(function() {
+		that.inCombat = false;
+		that.rnd.randNav();
+	    }, that.rnd.randDelay(bot_combat_delay));
 	};
 	var combat_tick = function() {
 	    combat_useItem().then((usedItem) => {
