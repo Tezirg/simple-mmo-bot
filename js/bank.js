@@ -44,7 +44,7 @@ class BotBank {
 	var depositBt = targetDOM.find(bot_bank_confirm_id);
 	try { depositBt[0].click(); } catch {}
 	setTimeout(function() {
-	    $(that.targetID).prop("src", bot_home_url);
+	    that.rnd.randNav();
 	    that.isBanking = false;
 	}, that.rnd.randDelay(bot_bank_delay));	
     }

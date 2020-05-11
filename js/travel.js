@@ -59,13 +59,19 @@ class BotTravel {
 		// Is there a mob to kill
 		targetDOM = $(that.targetID).contents();
 		var attackButton = targetDOM.find(bot_travel_attack_id);
-		if (attackButton.length >= 1)
-		    that.combat.travelCombat();
+		if (attackButton.length >= 1) {
+		    setTimeout(function() {
+			that.combat.travelCombat();
+		    }, that.rnd.randDelay(bot_travel_delay));
+		}
 	    }
 	    // Return to home for slow mode
 	    if (delay >= bot_travel_home_delay && !that.combat.isInCombat())
 	    {
-		$(that.targetID).prop("src", bot_home_url);
+		// Do it only 25% of the time
+		var dice = Math.floor(Math.random() * 100);
+		if (dice <= 25)
+		    that.rnd.randNav();
 	    }
 	}, that.rnd.randDelay(bot_travel_delay));
     }

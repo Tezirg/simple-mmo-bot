@@ -1,4 +1,15 @@
 var bot_home_url = "https://web.simple-mmo.com/"
+var bot_nav_urls = [
+    "https://web.simple-mmo.com/inventory",
+    "https://web.simple-mmo.com/town",
+    "https://web.simple-mmo.com/quests/viewall",
+    "https://web.simple-mmo.com/battlearena",
+    "https://web.simple-mmo.com/worldbosses",
+    "https://web.simple-mmo.com/jobs/viewall",
+    "https://web.simple-mmo.com/character",
+    "https://web.simple-mmo.com/friends"
+];
+
 var bot_rnd_urls = [
     "https://www.leparisien.fr/",
     "https://www.sudouest.fr/",
@@ -23,6 +34,12 @@ class BotRandomize {
 	this.delays = true;
 	this.refresh = true;
 	this.inBreak = false;
+    }
+
+    randNav() {
+	var that = this;
+	var randIdx = Math.floor(Math.random() * bot_nav_urls.length);
+	$(that.targetID).prop("src", bot_nav_urls[randIdx]);
     }
 
     randBreak(baseBreak) {

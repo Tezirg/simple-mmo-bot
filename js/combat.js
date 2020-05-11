@@ -89,9 +89,8 @@ class BotCombat {
 	    var donebt = targetDOM.find(bot_combat_done_id);
 	    try { donebt[0].click(); } catch {}
 
-	    // Back to home page
 	    that.inCombat = false;
-            $(that.targetID).prop("src", bot_home_url);	
+	    that.rnd.randNav();
 	};
 	var combat_tick = function() {
 	    combat_useItem().then((usedItem) => {
