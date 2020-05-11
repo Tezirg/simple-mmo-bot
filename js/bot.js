@@ -35,7 +35,7 @@ class SimpleMMOBot {
 	// Randomize
 	this.randomizeDelay = true;
 	this.randomizeRefresh = true;
-	this.random = new BotRandomize();
+	this.random = new BotRandomize(this.targetID);
 	
 	// Character
 	this.user = new BotUser(this.targetID, this.random);
@@ -109,6 +109,19 @@ class SimpleMMOBot {
     
     start() {
 	var that = this
+
+	// Reset states
+	this.random.inBreak = false;
+	this.bank.isBanking = false;
+	this.user.assignPoint = false;
+	this.quest.questDelay = 0;
+	this.combat.inCombat = false;
+	this.job.jobDelay = 0;
+	this.travel.stepDelay = 0;
+	var highestTimeoutId = setTimeout(";");
+	for (var i = 0 ; i < highestTimeoutId ; i++) {
+	    clearTimeout(i); 
+	}
 	
 	// Get config
 	this.randomizeDelay = $(bot_randomize_delay).is(":checked");
