@@ -1,5 +1,12 @@
 var bot_home_url = "https://web.simple-mmo.com/"
-var bot_rnd_url = "https://www.nicematin.com/"
+var bot_rnd_urls = [
+    "https://www.leparisien.fr/",
+    "https://www.sudouest.fr/",
+    "https://www.nicematin.com/",
+    "https://en.wikipedia.org/wiki/Special:Random",
+    "https://allocine.fr",
+    "https://www.programme-tv.net/"
+];
 var bot_rnd_delay_max = 850;
 var bot_rnd_delay_min = 150;
 var bot_rnd_refresh_max = 680;
@@ -23,7 +30,9 @@ class BotRandomize {
 	rnd = Math.floor(rnd);
 	that.inBreak = true;
 	// Leave game while in break
-	$(that.targetID).prop("src", bot_rnd_url);
+	var randIdx = Math.floor(Math.random() * bot_rnd_urls.length);
+	$(that.targetID).prop("src", bot_rnd_urls[randIdx]);
+	// After break
 	setTimeout(function() {
 	    // Redirect to home
 	    $(that.targetID).prop("src", bot_home_url);
