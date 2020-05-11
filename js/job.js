@@ -57,6 +57,8 @@ class BotJob {
 			that.jobDelay = 0;
 			// Redirect to home
 			$(that.targetID).prop("src", bot_home_url);
+			// Take a random break
+			that.rnd.randBreak();
 		    }, jobTime);
 		}, that.rnd.randDelay(bot_job_delay));
 	    }, that.rnd.randDelay(bot_job_delay));

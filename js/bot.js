@@ -61,6 +61,8 @@ class SimpleMMOBot {
     }
 
     isBusy() {
+	if (this.random.inBreak)
+	    return true;
 	if (!this.job.canJob())
 	    return true;
 	if (this.combat.isInCombat())

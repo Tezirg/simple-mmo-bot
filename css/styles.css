@@ -9,12 +9,12 @@
 }
 #bot-ctrl {
     width: 95vw;
-    height: 8vh;
+    height: 10vh;
 }
 
 #bot-target {
     display: block;
     margin: auto;
     width: 95vw;
-    height: 95vh;
+    height: 75vh;
 }
