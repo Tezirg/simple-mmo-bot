@@ -3,6 +3,7 @@ var bot_nav_urls = [
     "https://web.simple-mmo.com/inventory",
     "https://web.simple-mmo.com/town",
     "https://web.simple-mmo.com/quests/viewall",
+    "https://web.simple-mmo.com/tasks/viewall",
     "https://web.simple-mmo.com/battlearena",
     "https://web.simple-mmo.com/worldbosses",
     "https://web.simple-mmo.com/jobs/viewall",
