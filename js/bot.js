@@ -27,7 +27,7 @@ var bot_auto_points_index_id = "#points-index";
 
 var bot_run_bt_id = "#bot-run";
 var bot_stop_bt_id = "#bot-stop";
-var bot_refresh_freq = 1750;
+var bot_refresh_freq = 1874;
 
 class SimpleMMOBot {
     constructor(targetID, statusID) {
@@ -154,7 +154,7 @@ class SimpleMMOBot {
 	    var refresh_delay = that.random.randRefresh(bot_refresh_freq)
 	    that.userInterval = setInterval(intervalFn, refresh_delay);
 	};
-	this.userInterval = setInterval(intervalFn, 250);
+	this.userInterval = setInterval(intervalFn, 50);
     }
 
     stop() {
