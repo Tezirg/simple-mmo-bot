@@ -1,0 +1,32 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>IFrame tester</title>
+  <meta name="description" content="Simple mmo bot">
+  <meta name="author" content="Tezirg">
+</head>
+
+<body>
+  <div id="main" style="width:100vw;">
+    <div>
+      <input name="url" id="url" type="url"
+	     style="width:80vw;"
+	     value="https://en.wikipedia.org/wiki/Special:Random"/>
+      <button id="test-bt">Test</button>
+    </div>
+    <iframe id="target"
+	    style="display:block;margin:auto;width:95vw;height:95vh;"
+	    src="https://en.wikipedia.org/wiki/Special:Random">
+    </iframe>
+  </div>
+  
+  <script>
+    document.getElementById("test-bt").onclick = function(e) {
+      var url = document.getElementById("url").value;
+      document.getElementById("target").src = url;
+    };
+  </script>
+</body>
+</html>

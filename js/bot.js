@@ -11,7 +11,8 @@ var bot_auto_quest_id = "#auto-quest";
 var bot_auto_quest_index_id = "#quest-id";
 
 var bot_auto_job_id = "#auto-job";
-var bot_auto_job_num_id = "#job-num";
+var bot_auto_job_num_min_id = "#job-min-num";
+var bot_auto_job_num_max_id = "#job-max-num";
 
 var bot_auto_battle_arena_id = "#auto-battle-arena";
 var bot_auto_combat_health_id = "#auto-combat-health";
@@ -110,19 +111,6 @@ class SimpleMMOBot {
     start() {
 	var that = this
 
-	// Reset states
-	this.random.inBreak = false;
-	this.bank.isBanking = false;
-	this.user.assignPoint = false;
-	this.quest.questDelay = 0;
-	this.combat.inCombat = false;
-	this.job.jobDelay = 0;
-	this.travel.stepDelay = 0;
-	var highestTimeoutId = setTimeout(";");
-	for (var i = 0 ; i < highestTimeoutId ; i++) {
-	    clearTimeout(i); 
-	}
-	
 	// Get config
 	this.randomizeDelay = $(bot_randomize_delay).is(":checked");
 	this.randomizeRefresh = $(bot_randomize_refresh).is(":checked");
@@ -137,8 +125,10 @@ class SimpleMMOBot {
 	this.autoQuestID = parseInt($(bot_auto_quest_index_id).val());
 	
 	this.autoJob = $(bot_auto_job_id).is(":checked");
-	var jobNumber = parseInt($(bot_auto_job_num_id).val());
-	this.job.setNumber(jobNumber);
+	var jobNumberMin = parseInt($(bot_auto_job_num_min_id).val());
+	var jobNumberMax = parseInt($(bot_auto_job_num_max_id).val());
+	this.job.setNumberMin(jobNumberMin);
+	this.job.setNumberMax(jobNumberMax);
 	
 	this.autoBattleArena = $(bot_auto_battle_arena_id).is(":checked");
 	var autoCombatHealth = parseInt($(bot_auto_combat_health_id).val());
@@ -170,6 +160,19 @@ class SimpleMMOBot {
     stop() {
 	$(this.statusID).text("Stopped");
 	clearInterval(this.userInterval);
+
+	// Reset states
+	this.random.inBreak = false;
+	this.bank.isBanking = false;
+	this.user.assignPoint = false;
+	this.quest.questDelay = 0;
+	this.combat.inCombat = false;
+	this.job.jobDelay = 0;
+	this.travel.stepDelay = 0;
+	var highestTimeoutId = setTimeout(";");
+	for (var i = 0 ; i < highestTimeoutId ; i++) {
+	    clearTimeout(i); 
+	}
     }
 }
 

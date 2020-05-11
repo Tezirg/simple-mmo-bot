@@ -13,11 +13,16 @@ class BotJob {
 	this.targetID = targetID;
 	this.rnd = random;
 	this.jobDelay = 0;
-	this.jobNum = 1;
+	this.jobNumMin = 1;
+	this.jobNumMax = 2;
     }
 
-    setNumber(n) {
-	this.jobNum = n;
+    setNumberMin(n) {
+	this.jobNumMin = n;
+    }
+
+    setNumberMax(n) {
+	this.jobNumMax = n;
     }
 
     canJob() {
@@ -43,12 +48,18 @@ class BotJob {
 		try { startButton[0].click(); } catch {}
 		// Launch job 
 		setTimeout(function() {
+		    // Random number of jobs in bounds
+		    var rndNum = Math.floor(Math.random() * that.jobNumMax)
+		    rndNum += that.jobNumMin
+		    // Assign job number
 		    targetDOM = $(that.targetID).contents();
 		    var numJobs = targetDOM.find(bot_job_num_id);
-		    numJobs.val(that.jobNum);
+		    numJobs.val(rndNum);
+		    // Click start
 		    var jobButton = targetDOM.find(bot_job_start_bt_id);
 		    try { jobButton[0].click(); } catch {}
-		    var jobTime = bot_job_time  * that.jobNum
+		    // Compute delay
+		    var jobTime = bot_job_time  * rndNum
 		    jobTime += bot_job_time_delay;
 		    jobTime = that.rnd.randDelay(jobTime);
 		    that.jobDelay = jobTime;

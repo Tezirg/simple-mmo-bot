@@ -5,7 +5,10 @@ var bot_rnd_urls = [
     "https://www.nicematin.com/",
     "https://en.wikipedia.org/wiki/Special:Random",
     "https://allocine.fr",
-    "https://www.programme-tv.net/"
+    "https://www.programme-tv.net/",
+    "https://www.sncf.com/fr",
+    "https://www.mediapart.fr/",
+    "https://www.pcmag.com/"
 ];
 var bot_rnd_delay_max = 850;
 var bot_rnd_delay_min = 150;
