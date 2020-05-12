@@ -90,8 +90,8 @@ class BotCombat {
 	    try { donebt[0].click(); } catch {}
 
 	    setTimeout(function() {
-		that.inCombat = false;
 		that.rnd.randNav();
+		that.inCombat = false;
 	    }, that.rnd.randDelay(bot_combat_delay));
 	};
 	var combat_tick = function() {
