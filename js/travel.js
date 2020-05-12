@@ -66,7 +66,7 @@ class BotTravel {
 		}
 	    }
 	    // Return to home for slow mode
-	    if (delay >= bot_travel_home_delay && !that.combat.isInCombat())
+	    else if (delay >= bot_travel_home_delay)
 	    {
 		// Do it only 25% of the time
 		var dice = Math.floor(Math.random() * 100);
