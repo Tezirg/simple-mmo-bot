@@ -55,11 +55,11 @@ class BotRandomize {
 	$(that.targetID).prop("src", bot_rnd_urls[randIdx]);
 	// After break
 	setTimeout(function() {
-	    // Redirect to home
-	    $(that.targetID).prop("src", bot_home_url);
 	    setTimeout(function() {
 		that.inBreak = false;
 	    }, that.randDelay(bot_rnd_delay_min));
+	    // Redirect to home
+	    $(that.targetID).prop("src", bot_home_url);
 	}, rnd);
     }
 
