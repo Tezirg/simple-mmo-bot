@@ -21,6 +21,7 @@ var bot_auto_combat_use_id = "#auto-combat-use";
 var bot_auto_bank_id = "#auto-deposit";
 var bot_auto_bank_keep_id = "#keep-amount";
 var bot_auto_bank_deposit_id = "#deposit-amount";
+var bot_auto_bank_withdraw_id = "#withdraw-amount";
 
 var bot_auto_points_id = "#auto-points"
 var bot_auto_points_index_id = "#points-index";
@@ -139,8 +140,10 @@ class SimpleMMOBot {
 	this.autoBank = $(bot_auto_bank_id).is(":checked");
 	var bankKeep = parseInt($(bot_auto_bank_keep_id).val());
 	var bankDeposit = parseInt($(bot_auto_bank_deposit_id).val());
+	var bankWithdraw = parseInt($(bot_auto_bank_withdraw_id).val());
 	this.bank.setKeepAmount(bankKeep);
 	this.bank.setDepositAmount(bankDeposit);
+	this.bank.setWithdrawAmount(bankWithdraw);
 
 	this.autoPoints = $(bot_auto_points_id).is(":checked");
 	var pointIdx = parseInt($(bot_auto_points_index_id).val());
