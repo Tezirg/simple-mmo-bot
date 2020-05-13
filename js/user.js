@@ -116,9 +116,7 @@ class BotUser {
 	var that = this;
 	var confirm = new Promise((res, rej) => {
 	    var targetDOM = $(that.targetID).contents();
-	    console.log(targetDOM);
 	    var confirmBt = targetDOM.find(bot_char_assign_confirm_id);
-	    console.log(confirmBt);
 	    try {
 		confirmBt[0].click();
 		setTimeout(function() {
