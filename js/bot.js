@@ -164,6 +164,12 @@ class SimpleMMOBot {
 	$(this.statusID).text("Stopped");
 	clearInterval(this.userInterval);
 
+	// Cancel timers
+	var highestTimeoutId = setTimeout(";");
+	for (var i = 0 ; i < highestTimeoutId ; i++) {
+	    clearTimeout(i); 
+	}
+
 	// Reset states
 	this.random.inBreak = false;
 	this.bank.isBanking = false;
@@ -172,10 +178,6 @@ class SimpleMMOBot {
 	this.combat.inCombat = false;
 	this.job.jobDelay = 0;
 	this.travel.stepDelay = 0;
-	var highestTimeoutId = setTimeout(";");
-	for (var i = 0 ; i < highestTimeoutId ; i++) {
-	    clearTimeout(i); 
-	}
     }
 }
 

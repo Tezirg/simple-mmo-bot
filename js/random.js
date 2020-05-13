@@ -22,8 +22,8 @@ var bot_rnd_urls = [
     "https://www.mediapart.fr/",
     "https://www.pcmag.com/"
 ];
-var bot_rnd_delay_max = 850;
-var bot_rnd_delay_min = 150;
+var bot_rnd_delay_max = 512;
+var bot_rnd_delay_min = 128;
 var bot_rnd_refresh_max = 680;
 var bot_rnd_refresh_min = 45;
 var bot_rnd_break_min = 2*60*1000;
