@@ -106,13 +106,17 @@ class BotCombat {
 		    setTimeout(function() {
 			var targetDOM = $(that.targetID).contents();
 			var attackbt = targetDOM.find(bot_combat_attack_bt_id);
-			try { attackbt[0].click(); } catch {}
-			setTimeout(function() {
-			    if (combat_over())
-				combat_done();
-			    else
-				combat_tick();
-			}, that.rnd.randDelay(bot_combat_delay));
+			try {
+			    attackbt[0].click();
+			    setTimeout(function() {
+				if (combat_over())
+				    combat_done();
+				else
+				    combat_tick();
+			    }, that.rnd.randDelay(bot_combat_delay));
+			} catch {
+			    that.inCombat = false;
+			}
 		    }, that.rnd.randDelay(bot_combat_delay));
 		}
 	    });
@@ -141,14 +145,22 @@ class BotCombat {
 	setTimeout(function() {
 	    targetDOM = $(that.targetID).contents();
 	    genbt = targetDOM.find(bot_combat_arena_generate2_id);
-	    try { genbt[0].click(); } catch {}
+	    try {
+		genbt[0].click();
+	    } catch {
+		that.inCombat = false;
+	    }
 	    setTimeout(function() {
 		targetDOM = $(that.targetID).contents();
 		var attackbt = targetDOM.find(bot_combat_arena_attack_id);
-		try { attackbt[0].click(); } catch {}
-		setTimeout(function() {
-		    that.combat();
-		}, that.rnd.randDelay(bot_combat_delay));
+		try {
+		    attackbt[0].click();
+		    setTimeout(function() {
+			that.combat();
+		    }, that.rnd.randDelay(bot_combat_delay));
+		} catch {
+		    that.inCombat = false;
+		}
 	    }, that.rnd.randDelay(bot_combat_delay + bot_combat_delay / 2));
 	}, that.rnd.randDelay(bot_combat_delay));
 	
