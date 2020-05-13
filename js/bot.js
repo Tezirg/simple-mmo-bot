@@ -148,7 +148,11 @@ class SimpleMMOBot {
 	this.autoPoints = $(bot_auto_points_id).is(":checked");
 	var pointIdx = parseInt($(bot_auto_points_index_id).val());
 	this.user.pointsIndex = pointIdx;
-	
+
+	// Update src property
+	var current_url = $(this.targetID).contents().get(0).location.href;
+	$(this.targetID).prop("src", current_url);
+
 	$(this.statusID).text("Running");
 	// Continuously update user values
 	var intervalFn = function() {

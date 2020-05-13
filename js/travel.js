@@ -3,7 +3,7 @@ var bot_travel_home_delay = 20 * 1000 // 20 secs
 var bot_travel_url = "https://web.simple-mmo.com/travel"
 var bot_travel_button_id = ".stepbuttonnew"
 var bot_travel_attack_id = "a:contains(' Attack')"
-var bot_travel_delay = 690;
+var bot_travel_delay = 630;
 
 class BotTravel {
     constructor(targetID, user, combat, random) {
