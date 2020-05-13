@@ -137,7 +137,6 @@ class BotBank {
 		return that.bankAmount(amount);
 	    })
 	    .then(function(success) {
-		console.log(confirm_id);
 		return that.bankConfirm(confirm_id);
 	    })
 	    .catch(function(error) {
