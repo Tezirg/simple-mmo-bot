@@ -3,6 +3,10 @@ var bot_status_id = "#bot-status";
 
 var bot_randomize_delay = "#randomize-delay"
 var bot_randomize_refresh = "#randomize-refresh"
+var bot_randomize_sleep = "#randomize-sleep"
+var bot_sleep_start_id = "#sleep-start"
+var bot_sleep_end_id = "#sleep-end"
+var bot_sleep_job_id = "#sleep-job"
 
 var bot_auto_travel_id = "#auto-travel";
 var bot_auto_travel_combat_id = "#auto-travel-combat";
@@ -45,7 +49,7 @@ class SimpleMMOBot {
 	// Randomize
 	this.randomizeDelay = true;
 	this.randomizeRefresh = true;
-	this.random = new BotRandomize(this.targetID);	
+	this.random = new BotRandomize(this.targetID);
 	// Character
 	this.user = new BotUser(this.targetID, this.random);
 	this.userInterval = null;
@@ -71,10 +75,15 @@ class SimpleMMOBot {
 	this.autoTravel = false;
 	this.travel = new BotTravel(this.targetID, this.user, this.combat,
 				    this.random, this.sell);
+	// Sleep
+	this.autoSleep = false;
+	this.sleep = new BotSleep(this.job);
     }
 
     isBusy() {
 	if (this.random.inBreak)
+	    return true;
+	if (this.sleep.isSleeping)
 	    return true;
 	if (!this.job.canJob())
 	    return true;
@@ -97,7 +106,10 @@ class SimpleMMOBot {
 
 	if (!that.isBusy())
 	{
-	    if (that.autoPoints && that.user.level_up) {
+	    if (that.sleep.canSleep()) {
+		that.sleep.sleep();
+	    }
+	    else if (that.autoPoints && that.user.level_up) {
 		that.user.charPoints();
 	    }
 	    else if (that.autoBank && that.bank.canBank()) {
@@ -130,6 +142,14 @@ class SimpleMMOBot {
 	this.randomizeRefresh = $(bot_randomize_refresh).is(":checked");
 	this.random.delays = this.randomizeDelay;
 	this.random.refresh = this.randomizeRefresh;
+	
+	this.autoSleep = $(bot_randomize_sleep).is(":checked");
+	var sleepStart = $(bot_sleep_start_id).val();
+	this.sleep.startSleep = sleepStart;
+	var sleepEnd = $(bot_sleep_end_id).val();
+	this.sleep.endSleep = sleepEnd;
+	var sleepJob = parseInt($(bot_sleep_job_id).val());
+	this.sleep.jobSleep = sleepJob;
 	
 	var autoTravelCombat = $(bot_auto_travel_combat_id).is(":checked");
 	this.autoTravel = $(bot_auto_travel_id).is(":checked");

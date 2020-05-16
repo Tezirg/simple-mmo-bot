@@ -22,6 +22,16 @@
 	<label for="randomize-refresh">Randomize refresh</label>
 	<input type="checkbox" id="randomize-refresh"
 	       name="randomize-refresh" checked />
+	<label for="randomize-sleep">Simulate sleep</label>
+	<input type="checkbox" id="randomize-sleep"
+	       name="randomize-sleep" checked />
+	<label for="sleep-start">Sleep start:</label>
+	<input type="time" id="sleep-start" name="sleep-start" value="01:00"/>
+	<label for="sleep-end">Sleep end:</label>
+	<input type="time" id="sleep-end" name="sleep-end" value="06:15"/>
+	<label for="sleep-job">Sleep jobs:</label>
+	<input type="number" id="sleep-job" name="sleep-job"
+	       min="1" value="10"/>
       </div>
       <div id="bot-conf-travel">
 	<label for="auto-travel">Auto travel</label>
@@ -384,6 +394,7 @@
   </div>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="js/random.js"></script>
+  <script src="js/sleep.js"></script>
   <script src="js/sell.js"></script>
   <script src="js/bank.js"></script>
   <script src="js/combat.js"></script>

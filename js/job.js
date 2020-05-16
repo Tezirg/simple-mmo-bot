@@ -32,7 +32,7 @@ class BotJob {
 	    return false;
     }
     
-    triggerJob() {
+    triggerJob(numJobs=null) {
 	var that = this;
 	// Find user job url
 	var targetDOM = $(this.targetID).contents();
@@ -48,18 +48,27 @@ class BotJob {
 		try { startButton[0].click(); } catch {}
 		// Launch job 
 		setTimeout(function() {
-		    // Random number of jobs in bounds
-		    var rndNum = Math.floor(Math.random() * that.jobNumMax)
-		    rndNum += that.jobNumMin
+		    var numJob = 1;
+		    if (numJobs == null) {
+			// Random number of jobs in bounds
+			var rndN = Math.floor(Math.random() * that.jobNumMax);
+			rndN += that.jobNumMin;
+			numJob = rndN;
+		    }
+		    else {
+			// Provided
+			numJob = numJobs;
+		    }
+		    console.log(numJob);
 		    // Assign job number
 		    targetDOM = $(that.targetID).contents();
-		    var numJobs = targetDOM.find(bot_job_num_id);
-		    numJobs.val(rndNum);
+		    var numJobsSlider = targetDOM.find(bot_job_num_id);
+		    numJobsSlider.val(numJob);
 		    // Click start
 		    var jobButton = targetDOM.find(bot_job_start_bt_id);
 		    try { jobButton[0].click(); } catch {}
 		    // Compute delay
-		    var jobTime = bot_job_time  * rndNum
+		    var jobTime = bot_job_time  * numJob;
 		    jobTime += bot_job_time_delay;
 		    jobTime = that.rnd.randDelay(jobTime);
 		    that.jobDelay = jobTime;
@@ -75,7 +84,7 @@ class BotJob {
 	$(this.targetID).prop("src", job_url);
     }
     
-    job() {
+    job(numJob=null) {
 	if (this.jobDelay == 0)
 	{
 	    this.jobDelay = 1;
@@ -85,13 +94,13 @@ class BotJob {
 		$(this.targetID).bind("load", function() {
 		    $(that.targetID).unbind();
 		    setTimeout(function() {
-			that.triggerJob();
+			that.triggerJob(numJob);
 		    }, that.rnd.randDelay(bot_job_delay));
 		});
 		$(this.targetID).prop("src", bot_job_url);		
 	    }
 	    else {
-		this.triggerJob();
+		this.triggerJob(numJob);
 	    }
 	}
     }
