@@ -148,7 +148,12 @@ class BotCombat {
 	var that = this;
 	var targetDOM = $(that.targetID).contents();
 	var genbt = targetDOM.find(bot_combat_arena_generate_id);
-	try { genbt[0].click(); } catch {}
+	try {
+	    genbt[0].click();
+	} catch {
+	    that.inCombat = false;
+	    that.rnd.randNav();
+	}
 	setTimeout(function() {
 	    targetDOM = $(that.targetID).contents();
 	    genbt = targetDOM.find(bot_combat_arena_generate2_id);
@@ -156,6 +161,7 @@ class BotCombat {
 		genbt[0].click();
 	    } catch {
 		that.inCombat = false;
+		that.rnd.randNav();
 	    }
 	    setTimeout(function() {
 		targetDOM = $(that.targetID).contents();
@@ -167,6 +173,7 @@ class BotCombat {
 		    }, that.rnd.randDelay(bot_combat_delay));
 		} catch {
 		    that.inCombat = false;
+		    that.rnd.randNav();
 		}
 	    }, that.rnd.randDelay(bot_combat_delay + bot_combat_delay / 2));
 	}, that.rnd.randDelay(bot_combat_delay));
