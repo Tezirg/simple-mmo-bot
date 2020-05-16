@@ -18,7 +18,7 @@ var bot_auto_battle_arena_id = "#auto-battle-arena";
 var bot_auto_combat_health_id = "#auto-combat-health";
 var bot_auto_combat_use_id = "#auto-combat-use";
 
-var bot_auto_bank_id = "#auto-deposit";
+var bot_auto_bank_id = "#auto-bank";
 var bot_auto_bank_keep_id = "#keep-amount";
 var bot_auto_bank_deposit_id = "#deposit-amount";
 var bot_auto_bank_withdraw_id = "#withdraw-amount";
