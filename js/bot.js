@@ -45,8 +45,7 @@ class SimpleMMOBot {
 	// Randomize
 	this.randomizeDelay = true;
 	this.randomizeRefresh = true;
-	this.random = new BotRandomize(this.targetID);
-	
+	this.random = new BotRandomize(this.targetID);	
 	// Character
 	this.user = new BotUser(this.targetID, this.random);
 	this.userInterval = null;
@@ -58,16 +57,19 @@ class SimpleMMOBot {
 	// Jobs
 	this.autoJob = false;
 	this.job = new BotJob(this.targetID, this.random);
+	//Sell
+	this.autoSell = false;
+	this.sell = new BotSell(this.targetID, this.random);
 	// Combat
 	this.autoBattleArena = false;
 	this.combat = new BotCombat(this.targetID, this.user, this.random);
-	// Travel
-	this.autoTravel = false;
-	this.travel = new BotTravel(this.targetID, this.user,
-				    this.combat, this.random);
 	// Banking
 	this.autoBank = false;
 	this.bank = new BotBank(this.targetID, this.user, this.random);
+	// Travel
+	this.autoTravel = false;
+	this.travel = new BotTravel(this.targetID, this.user, this.combat,
+				    this.random, this.sell);
     }
 
     isBusy() {
@@ -82,6 +84,8 @@ class SimpleMMOBot {
 	if (this.user.assignPoint)
 	    return true;
 	if (this.quest.isInQuest())
+	    return true;
+	if (this.sell.isSelling)
 	    return true;
 	return false;
     }
@@ -160,18 +164,25 @@ class SimpleMMOBot {
 	this.user.pointsIndex = pointIdx;
 
 	this.autoSell = $(bot_auto_sell_id).is(":checked");
+	this.sell.canAutoSell = this.autoSell;
 	var sellFiltQual = $(bot_auto_sell_filter_quality_id).is(":checked");
-	var sellQual = $(bot_auto_sell_quality_id).val();
-	console.log("Selling items worst than: ", sellQual);
+	var sellQual = parseInt($(bot_auto_sell_quality_id).val());
+	console.log("Selling items worst than: ", sellFiltQual, sellQual);
+	this.sell.filterItemQuality = sellFiltQual;
+	this.sell.itemQualityIndex = sellQual;
 	var sellFiltLevel = $(bot_auto_sell_filter_level_id).is(":checked");
 	var sellLevel = parseInt($(bot_auto_sell_level_id).val());
-	console.log("Selling items uden lvl: ", sellLevel);
+	console.log("Selling items under lvl: ", sellLevel);
+	this.sell.filterItemLevel = sellFiltLevel;
+	this.sell.itemLevel = sellLevel;
 	var sellFiltType = $(bot_auto_sell_filter_type_id).is(":checked");
 	var sellType = [];
 	$.each($(bot_auto_sell_type_id), function() {
 	    sellType.push($(this).val());
 	});
-	console.log("Selling items of type:", sellType);
+	this.sell.filterItemTypes = sellFiltType;
+	this.sell.itemTypes = sellType;
+	console.log("Selling items of type:", sellFiltType, sellType);
 
 	// Update src property
 	var current_url = $(this.targetID).contents().get(0).location.href;
