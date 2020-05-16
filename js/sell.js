@@ -185,6 +185,10 @@ class BotSell {
 
     sell(bot_sell_has_item_id, bot_sell_inspect_item_id) {
 	var that = this;
+
+	if (this.canSell == false)
+	    return Promise.resolve(false);
+
 	this.isSelling = true;
 	var sold = new Promise((res, rej) => {
 	    var full_sell = false;
