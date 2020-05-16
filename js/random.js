@@ -27,7 +27,7 @@ var bot_rnd_delay_min = 128;
 var bot_rnd_refresh_max = 680;
 var bot_rnd_refresh_min = 45;
 var bot_rnd_break_min = 2*60*1000;
-var bot_rnd_break_max = 7*60*1000;
+var bot_rnd_break_max = 5*60*1000;
 
 class BotRandomize {
     constructor(target) {

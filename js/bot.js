@@ -62,7 +62,8 @@ class SimpleMMOBot {
 	this.sell = new BotSell(this.targetID, this.random);
 	// Combat
 	this.autoBattleArena = false;
-	this.combat = new BotCombat(this.targetID, this.user, this.random);
+	this.combat = new BotCombat(this.targetID, this.user,
+				    this.random, this.sell);
 	// Banking
 	this.autoBank = false;
 	this.bank = new BotBank(this.targetID, this.user, this.random);

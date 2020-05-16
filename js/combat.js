@@ -13,10 +13,11 @@ var bot_combat_done_id = "button:contains('OK')"
 var bot_combat_delay = 816
 
 class BotCombat {
-    constructor(targetID, user, random) {
+    constructor(targetID, user, random, sell) {
 	this.targetID = targetID;
 	this.user = user;
 	this.rnd = random;
+	this.sell = sell;
 	this.minHealth = 0.0;
 	this.useItemHealth = 0.0;
 	this.inCombat = false;
@@ -85,14 +86,20 @@ class BotCombat {
 	    return usePromise;
 	};
 	var combat_done = function() {
-	    var targetDOM = $(that.targetID).contents();
-	    var donebt = targetDOM.find(bot_combat_done_id);
-	    try { donebt[0].click(); } catch {}
+	    that.sell.combatSell()
+		.then(function(sold) {
+		    var targetDOM = $(that.targetID).contents();
+		    var donebt = targetDOM.find(bot_combat_done_id);
+		    try { donebt[0].click(); } catch {}
 
-	    setTimeout(function() {
-		that.rnd.randNav();
-		that.inCombat = false;
-	    }, that.rnd.randDelay(bot_combat_delay));
+		    setTimeout(function() {
+			that.rnd.randNav();
+			that.inCombat = false;
+		    }, that.rnd.randDelay(bot_combat_delay));
+		})
+		.catch(function(error) {
+		    that.inCombat = false;
+		});
 	};
 	var combat_tick = function() {
 	    combat_useItem().then((usedItem) => {

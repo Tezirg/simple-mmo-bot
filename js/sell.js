@@ -1,7 +1,7 @@
 var bot_home_url = "https://web.simple-mmo.com/"
 
-var bot_sell_combat_has_item_id = "div[id^='item-id']"
-var bot_sell_combat_inspect_item_id = "div[id^='item-id']"
+var bot_sell_combat_has_item_id = "span[id^='item-id']"
+var bot_sell_combat_inspect_item_id = "span[id^='item-id']"
 var bot_sell_travel_has_item_id = "div:contains('You have found the item')"
 var bot_sell_travel_inspect_item_id = "span[id^='item-id']"
 var bot_sell_item_lvl_id ="#swal2-content:contains('This item requires level')"
@@ -229,6 +229,7 @@ class BotSell {
     }
     
     combatSell() {
+	console.log("called combatSell()");
 	return this.sell(bot_sell_combat_has_item_id,
 			 bot_sell_combat_inspect_item_id);
     }
