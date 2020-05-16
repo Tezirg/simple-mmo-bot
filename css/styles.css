@@ -1,20 +1,19 @@
 #bot-main {
     width: 98vw;
-    height: 100vh;
 }
 
 #bot-conf {
     width: 95vw;
-    height: 20vh;
+    height: 25vh;
 }
 #bot-ctrl {
     width: 95vw;
-    height: 10vh;
+    height: 4vh;
 }
 
 #bot-target {
     display: block;
     margin: auto;
     width: 95vw;
-    height: 75vh;
+    height: 69vh;
 }

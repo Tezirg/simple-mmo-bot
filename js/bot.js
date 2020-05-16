@@ -23,8 +23,16 @@ var bot_auto_bank_keep_id = "#keep-amount";
 var bot_auto_bank_deposit_id = "#deposit-amount";
 var bot_auto_bank_withdraw_id = "#withdraw-amount";
 
-var bot_auto_points_id = "#auto-points"
+var bot_auto_points_id = "#auto-points";
 var bot_auto_points_index_id = "#points-index";
+
+var bot_auto_sell_id = "#auto-sell";
+var bot_auto_sell_filter_quality_id = "#filter-sell-quality"
+var bot_auto_sell_quality_id = "#sell-quality option:selected"
+var bot_auto_sell_filter_level_id = "#filter-sell-level"
+var bot_auto_sell_level_id = "#sell-level"
+var bot_auto_sell_filter_type_id = "#filter-sell-type"
+var bot_auto_sell_type_id = "#sell-type option:selected"
 
 var bot_run_bt_id = "#bot-run";
 var bot_stop_bt_id = "#bot-stop";
@@ -123,7 +131,8 @@ class SimpleMMOBot {
 	this.travel.setTravelCombat(autoTravelCombat);
 	
 	this.autoQuest = $(bot_auto_quest_id).is(":checked");
-	this.autoQuestID = parseInt($(bot_auto_quest_index_id).val());
+	this.autoQuestID = $(bot_auto_quest_index_id).prop('selectedIndex');
+	this.autoQuestID = parseInt(this.autoQuestID);
 	
 	this.autoJob = $(bot_auto_job_id).is(":checked");
 	var jobNumberMin = parseInt($(bot_auto_job_num_min_id).val());
@@ -146,8 +155,23 @@ class SimpleMMOBot {
 	this.bank.setWithdrawAmount(bankWithdraw);
 
 	this.autoPoints = $(bot_auto_points_id).is(":checked");
-	var pointIdx = parseInt($(bot_auto_points_index_id).val());
+	var pointIdx = $(bot_auto_points_index_id).prop('selectedIndex');
+	pointIdx = parseInt(pointIdx);
 	this.user.pointsIndex = pointIdx;
+
+	this.autoSell = $(bot_auto_sell_id).is(":checked");
+	var sellFiltQual = $(bot_auto_sell_filter_quality_id).is(":checked");
+	var sellQual = $(bot_auto_sell_quality_id).val();
+	console.log("Selling items worst than: ", sellQual);
+	var sellFiltLevel = $(bot_auto_sell_filter_level_id).is(":checked");
+	var sellLevel = parseInt($(bot_auto_sell_level_id).val());
+	console.log("Selling items uden lvl: ", sellLevel);
+	var sellFiltType = $(bot_auto_sell_filter_type_id).is(":checked");
+	var sellType = [];
+	$.each($(bot_auto_sell_type_id), function() {
+	    sellType.push($(this).val());
+	});
+	console.log("Selling items of type:", sellType);
 
 	// Update src property
 	var current_url = $(this.targetID).contents().get(0).location.href;
