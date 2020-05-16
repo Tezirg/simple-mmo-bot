@@ -208,6 +208,7 @@ class BotSell {
 		    return Promise.resolve(true);
 		})
 		.catch(function(error) {
+		    that.isSelling = false;
 		    console.log(error);
 		})
 		.finally(function() {
