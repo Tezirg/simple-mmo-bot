@@ -8,6 +8,7 @@ var bot_sell_item_lvl_id ="#swal2-content:contains('This item requires level')"
 var bot_sell_item_lvl_txt = "This item requires level"
 var bot_sell_item_quality_id = bot_sell_item_lvl_id + " span:first"
 var bot_sell_item_type_id = bot_sell_item_lvl_id + " div:first"
+var bot_sell_inspect_cancel_id = "div:contains('"+bot_sell_lvl_txt+"')"
 var bot_sell_quick_id = "a:contains('Quick sell this item for')"
 var bot_sell_confirm_id = "button:contains('Yes')"
 var bot_sell_done_id = "button:contains('Close')"
@@ -142,6 +143,10 @@ class BotSell {
 		if (lvl_ok && quality_ok && type_ok)
 		    res(true);
 		else {
+		    var insp_div = targetDOM.find(bot_sell_inspect_cancel_id);
+		    if (insp_div.length >= 1)
+			insp_div[0].click();
+
 		    var msg = "Can't sell item: ";
 		    msg += `lvl ${lvl}/${that.maxItemLevel}`;
 		    msg += `, quality ${quality}/${that.maxItemQuality}`;
