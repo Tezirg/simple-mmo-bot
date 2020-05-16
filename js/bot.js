@@ -106,7 +106,7 @@ class SimpleMMOBot {
 
 	if (!that.isBusy())
 	{
-	    if (that.sleep.canSleep()) {
+	    if (that.autoSleep && that.sleep.canSleep()) {
 		that.sleep.sleep();
 	    }
 	    else if (that.autoPoints && that.user.level_up) {
