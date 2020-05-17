@@ -53,7 +53,7 @@ class BotSell {
 	this.maxItemLevel = lvl;
     }
 
-    set filerItemQuality(enabled) {
+    set filterItemQuality(enabled) {
 	this.enableFilterItemQuality = enabled;
     }
     set itemQualityIndex(q) {
@@ -124,6 +124,10 @@ class BotSell {
 		var quality = bot_sell_qualities.indexOf(quality_txt);
 		console.log("Quality index:", quality, that.maxItemQuality);
 		var quality_ok = true;
+		console.log("Quality filter enabled ?",
+			    that.enableFilterItemQuality);
+		console.log("Quality is worst ?",
+			    quality >= that.maxItemQuality);		
 		if (that.enableFilterItemQuality &&
 		    quality >= that.maxItemQuality) {
 		    console.log("Quality filter KO");
