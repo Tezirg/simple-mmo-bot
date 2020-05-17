@@ -77,7 +77,7 @@ class SimpleMMOBot {
 				    this.random, this.sell);
 	// Sleep
 	this.autoSleep = false;
-	this.sleep = new BotSleep(this.job);
+	this.sleep = new BotSleep(this.random, this.job);
     }
 
     isBusy() {
@@ -238,6 +238,7 @@ class SimpleMMOBot {
 	this.combat.inCombat = false;
 	this.job.jobDelay = 0;
 	this.travel.stepDelay = 0;
+	this.sleep.isSleeping = false;
     }
 }
 

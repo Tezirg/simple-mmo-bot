@@ -33,6 +33,7 @@ class BotJob {
     }
     
     triggerJob(numJobs=null) {
+	console.log("triggerJob", numJobs);
 	var that = this;
 	// Find user job url
 	var targetDOM = $(this.targetID).contents();
@@ -59,7 +60,7 @@ class BotJob {
 			// Provided
 			numJob = numJobs;
 		    }
-		    console.log(numJob);
+		    console.log("numJob =", numJob);
 		    // Assign job number
 		    targetDOM = $(that.targetID).contents();
 		    var numJobsSlider = targetDOM.find(bot_job_num_id);
@@ -76,8 +77,11 @@ class BotJob {
 		    setTimeout(function() {
 			that.jobDelay = 0;
 		    }, jobTime);
-		    // Take a random break
-		    that.rnd.randBreak(jobTime);
+		    if (numJobs == null) {
+			console.log("Job randBreak");
+			// Take a random break
+			that.rnd.randBreak(jobTime);
+		    }
 		}, that.rnd.randDelay(bot_job_delay));
 	    }, that.rnd.randDelay(bot_job_delay));
 	});
@@ -85,6 +89,7 @@ class BotJob {
     }
     
     job(numJob=null) {
+	console.log("job()", numJob);
 	if (this.jobDelay == 0)
 	{
 	    this.jobDelay = 1;

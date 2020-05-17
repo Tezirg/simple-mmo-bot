@@ -1,5 +1,6 @@
 class BotSleep {
-    constructor(job) {
+    constructor(random, job) {
+	this.rnd = random;
 	this.job = job;
 	this.startHour = 0;
 	this.startMin = 0;
@@ -61,8 +62,14 @@ class BotSleep {
 	console.log("sleep_ms", to_sleep_ms);
 
 	that.job.job(that.sleepJobs);
+	console.log("After sleep job call");
 	setTimeout(function() {
-	    that.isSleeping = false;
-	}, to_sleep_ms);
+	    console.log("Trigger sleep randBreak");
+	    setTimeout(function() {
+		that.isSleeping = false;
+		console.log("Done Sleeping");
+	    }, to_sleep_ms);
+	    that.rnd.randBreak(to_sleep_ms);
+	}, 10 * 1000);
     }
 }

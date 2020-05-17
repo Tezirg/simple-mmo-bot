@@ -2,13 +2,12 @@ var bot_home_url = "https://web.simple-mmo.com/"
 var bot_nav_urls = [
     "https://web.simple-mmo.com/inventory",
     "https://web.simple-mmo.com/town",
-    "https://web.simple-mmo.com/quests/viewall",
     "https://web.simple-mmo.com/tasks/viewall",
-    "https://web.simple-mmo.com/battlearena",
     "https://web.simple-mmo.com/worldbosses",
-    "https://web.simple-mmo.com/jobs/viewall",
     "https://web.simple-mmo.com/character",
-    "https://web.simple-mmo.com/friends"
+    "https://web.simple-mmo.com/events",
+    "https://web.simple-mmo.com/friends",
+    "https://web.simple-mmo.com/messages/inbox"
 ];
 
 var bot_rnd_urls = [
@@ -27,7 +26,7 @@ var bot_rnd_delay_min = 128;
 var bot_rnd_refresh_max = 680;
 var bot_rnd_refresh_min = 45;
 var bot_rnd_break_min = 2*60*1000;
-var bot_rnd_break_max = 5*60*1000;
+var bot_rnd_break_max = 4*60*1000;
 
 class BotRandomize {
     constructor(target) {

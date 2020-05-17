@@ -125,8 +125,10 @@ class BotSell {
 		console.log("Quality index:", quality, that.maxItemQuality);
 		var quality_ok = true;
 		if (that.enableFilterItemQuality &&
-		    quality >= that.maxItemQuality)
+		    quality >= that.maxItemQuality) {
+		    console.log("Quality filter KO");
 		    quality_ok = false;
+		}
 		
 		var div_type = targetDOM.find(bot_sell_item_type_id);
 		console.log("Item type div", div_type)
