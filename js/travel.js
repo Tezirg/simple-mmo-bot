@@ -143,7 +143,9 @@ class BotTravel {
 	    })
 	    .catch(function(e) {
 		console.log("stepAction failed: ", e);
-		that.setDelay(0);
+		setTimeout(function() {
+		    that.setDelay(0);
+		}, that.rnd.randDelay(bot_travel_delay));
 	    });
     }
 
