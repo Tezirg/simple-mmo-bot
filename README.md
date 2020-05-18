@@ -1,11 +1,11 @@
 # Simple-MMO Bot
 
-# /!\ Use at your own risk
-This bot can acheive human-like behavior, but like all programs it may have bugs leading to a trade-lock on your account. Use it at your own risk, this is your responsability to go against the game rules by using this piece of software.
+## /!\ Use at your own risk
+This bot can achieve human-like behavior, but like all programs it may have bugs leading to a ban on your account. Use it at your own risk, this is your responsability to go against the game rules by using this piece of software.
 
 ## Getting started
  - Download or clone the code
- - Launch the `run.sh` script or open `index.html` with browser allowing XSS
+ - Launch the `run.sh` script or open `index.html` with a browser allowing XSS
 
 ## Features
  - Auto traveling
@@ -14,7 +14,7 @@ This bot can acheive human-like behavior, but like all programs it may have bugs
  - Auto battle arena
  - Auto job
  - Auto character points assign
- - Auto food consume
+ - Auto food consume (could work better if the game updates health correctly)
  - Auto loot selling with advanced filters (Rarity, level and item type)
  - Auto deposit
  - Auto withdraw
@@ -26,3 +26,6 @@ This bot can acheive human-like behavior, but like all programs it may have bugs
 
 ## /!\ Cross site scripting warning
 It is NOT recommended to use a browser with cross site scripting enabled as it may lead to your credentials being stolen, therefore DO NOT use the same browser for regular internet navigation.
+
+### Windows users
+There is a way to launch google-chrome with the configuration provided in `run.sh`, figure it out/google it or stop using windows. 
