@@ -9,6 +9,7 @@ var bot_combat_use_id = "#useItem"
 var bot_combat_attack_bt_id = "#attackButton"
 var bot_combat_used_id = "h2:contains('Success!')"
 var bot_combat_ended_id = "h2:contains('Woohoo! You defeated the enemy!')"
+var bot_combat_ended2_id = "h2:contains('The enemy cannot be attacked')"
 var bot_combat_done_id = "button:contains('OK')"
 var bot_combat_delay = 816
 
@@ -60,6 +61,9 @@ class BotCombat {
 	    var targetDOM = $(that.targetID).contents();
 	    var doneElem = targetDOM.find(bot_combat_ended_id);
 	    if (doneElem.length >= 1)
+		return true;
+	    var doneElem2 = targetDOM.find(bot_combat_ended2_id);
+	    if (doneElem2.length >= 1)
 		return true;
 	    else
 		return false;
