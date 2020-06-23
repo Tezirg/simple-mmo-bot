@@ -1,5 +1,8 @@
 # Simple-MMO Bot
 
+## /!\ Unsupported
+This program may not stay up-to-date with the simple-mmo client
+
 ## /!\ Use at your own risk
 This bot can achieve human-like behavior, but like all programs it may have bugs leading to a ban on your account. Use it at your own risk, this is your responsability to go against the game rules by using this piece of software.
 
@@ -28,4 +31,4 @@ This bot can achieve human-like behavior, but like all programs it may have bugs
 It is NOT recommended to use a browser with cross site scripting enabled as it may lead to your credentials being stolen, therefore DO NOT use the same browser for regular internet navigation.
 
 ### Windows users
-There is a way to launch google-chrome with the configuration provided in `run.sh`, figure it out/google it or stop using windows. 
+There is a way to launch google-chrome with the configuration provided in `run.sh`, by creating a shortcut and setting command line arguments there. 
